@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Estación P&P · Catálogo</title>
+<meta name="description" content="Catálogo de licores de La Estación P&P, Bar y Cafetería en Sogamoso.">
+<meta name="theme-color" content="#140B0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --choco:#341411; --negro:#140B0B; --cafe:#84431E; --caramelo:#D4965C;
+    --crema:#EBCFAE; --oro:#E2B867; --blanco:#FBF6EE;
+    --serif:"Playfair Display","Times New Roman",serif;
+    --sans:"Jost","Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:150px}
+  body{
+    font-family:var(--sans);color:var(--blanco);line-height:1.4;
+    background:
+      radial-gradient(900px 500px at 85% -5%,rgba(212,150,92,.20),transparent 60%),
+      radial-gradient(700px 500px at 0% 40%,rgba(132,67,30,.22),transparent 60%),
+      var(--negro);
+    background-attachment:fixed;min-height:100vh;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px}
+
+  header.hero{text-align:center;padding:36px 0 18px}
+  .logo{font-family:var(--serif);color:var(--oro);line-height:1;letter-spacing:.02em}
+  .logo .la{display:block;font-size:22px}
+  .logo .est{display:block;font-size:clamp(40px,10vw,60px);font-weight:600}
+  .logo .pyp{display:flex;align-items:center;justify-content:center;gap:14px;font-size:26px;font-weight:600;margin-top:2px}
+  .logo .pyp::before,.logo .pyp::after{content:"";height:1px;width:clamp(36px,12vw,70px);background:var(--oro)}
+  .tag{margin-top:12px;font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--crema);opacity:.85}
+
+  .controls{
+    position:sticky;top:0;z-index:20;padding:10px 0 8px;
+    background:linear-gradient(var(--negro) 78%,rgba(20,11,11,0));
+  }
+  .search{position:relative}
+  .search input{
+    width:100%;padding:12px 40px 12px 40px;border-radius:999px;border:1px solid rgba(226,184,103,.35);
+    background:rgba(52,20,17,.7);color:var(--blanco);font:400 16px var(--sans);outline:none;
+  }
+  .search input::placeholder{color:rgba(235,207,174,.6)}
+  .search input:focus{border-color:var(--oro);box-shadow:0 0 0 3px rgba(226,184,103,.18)}
+  .search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:var(--crema);fill:none;stroke-width:2}
+  .search button{
+    position:absolute;right:8px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;
+    border:0;background:transparent;color:var(--crema);font-size:20px;cursor:pointer;display:none
+  }
+  .search.has-text button{display:block}
+  .chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{
+    flex:none;padding:8px 15px;border-radius:999px;border:1px solid rgba(226,184,103,.35);
+    background:transparent;color:var(--crema);font:500 14px var(--sans);cursor:pointer;white-space:nowrap;
+    transition:background .15s,color .15s,border-color .15s
+  }
+  .chip:hover{border-color:var(--oro)}
+  .chip[aria-pressed="true"]{background:var(--oro);border-color:var(--oro);color:var(--choco)}
+  .chips.sub .chip{padding:6px 12px;font-size:13px}
+  .chips.sub{display:none}
+  .chips.sub.show{display:flex}
+  .sortrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 2px 0;font-size:13px;color:var(--crema)}
+  .sortbtn{background:none;border:0;color:var(--oro);font:500 13px var(--sans);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+  section.cat{margin-top:34px}
+  .cat-head{text-align:center;margin-bottom:6px}
+  .kicker{font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--crema)}
+  .cat-title{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(44px,12vw,72px);line-height:1.05;color:var(--blanco)}
+  .cat-title::first-letter{font-size:1.25em;color:var(--blanco)}
+  .grp{margin-top:20px}
+  .grp-name{
+    text-align:center;font-size:15px;letter-spacing:.3em;text-transform:uppercase;color:var(--blanco);
+    padding-bottom:10px;position:relative
+  }
+  .grp-name::after{content:"";display:block;height:1px;width:70%;max-width:340px;margin:10px auto 0;background:linear-gradient(90deg,transparent,var(--caramelo),transparent)}
+  .colhead,.row{display:grid;align-items:baseline;gap:8px}
+  .list .colhead,.list .row{grid-template-columns:1fr auto}
+  .two .colhead,.two .row{grid-template-columns:1fr 92px 108px}
+  .colhead{padding:10px 6px 8px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);border-bottom:1px solid rgba(212,150,92,.6)}
+  .colhead span:not(:first-child){text-align:right}
+  .row{padding:15px 6px;border-bottom:1px solid rgba(212,150,92,.45);transition:background .15s}
+  .row:hover{background:rgba(212,150,92,.07)}
+  .name{font-size:18px;font-weight:600}
+  .name em{font-weight:300;font-style:italic;font-size:.95em;margin-left:6px;color:var(--crema)}
+  .price{font-size:18px;font-weight:500;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .price.dash{opacity:.5}
+  .price small{font-size:12px;font-weight:300;opacity:.8}
+  mark{background:rgba(226,184,103,.35);color:inherit;border-radius:3px;padding:0 1px}
+
+  .empty{text-align:center;padding:50px 10px;color:var(--crema);display:none}
+  .empty.show{display:block}
+
+  footer{margin:56px 0 40px;text-align:center;color:var(--crema)}
+  footer a{color:var(--blanco);text-decoration:none;font-weight:500;font-size:20px;display:inline-flex;align-items:center;gap:10px}
+  footer a:hover{color:var(--oro)}
+  footer svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.8}
+  .addr{margin-top:8px;font-size:17px}
+  .legal{margin:22px auto 0;max-width:520px;font-size:12px;line-height:1.5;opacity:.75}
+  .top{position:fixed;right:14px;bottom:16px;width:44px;height:44px;border-radius:50%;border:1px solid var(--oro);background:rgba(52,20,17,.9);color:var(--oro);font-size:20px;cursor:pointer;display:none;z-index:30}
+  .top.show{display:block}
+
+  @media (max-width:420px){
+    .two .colhead,.two .row{grid-template-columns:1fr 78px 92px}
+    .name{font-size:16px}.price{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="logo" role="img" aria-label="La Estación P&P">
+      <span class="la">LA</span><span class="est">ESTACIÓN</span><span class="pyp">P&amp;P</span>
+    </div>
+    <p class="tag">Bar y Cafetería · Sogamoso</p>
+  </header>
+
+  <div class="controls">
+    <div class="search" id="searchBox">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" inputmode="search" autocomplete="off" placeholder="Buscar: Heineken, aguardiente, Chivas…" aria-label="Buscar en el catálogo">
+      <button id="clear" type="button" aria-label="Borrar búsqueda">×</button>
+    </div>
+    <div class="chips" id="catChips" role="group" aria-label="Categorías"></div>
+    <div class="chips sub" id="tierChips" role="group" aria-label="Gama"></div>
+    <div class="sortrow">
+      <span id="count"></span>
+      <button class="sortbtn" id="sortBtn" type="button">Ordenar: como en la carta</button>
+    </div>
+  </div>
+
+  <main id="app"></main>
+  <p class="empty" id="empty">No encontramos productos con esa búsqueda.<br>Prueba con otra palabra o escríbenos por Instagram.</p>
+
+  <footer>
+    <a href="https://www.instagram.com/laestacionpyp" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></svg>
+      laestacionpyp
+    </a>
+    <p class="addr">Calle 7 # 22 - 45, EDS El Garcero</p>
+    <p class="legal">El exceso de alcohol es perjudicial para la salud. Prohibida la venta a menores de edad. Precios en pesos colombianos, sujetos a cambio.</p>
+  </footer>
+</div>
+<button class="top" id="top" type="button" aria-label="Volver arriba">↑</button>
+
+<script>
+/* ---------- Datos (mismo orden que las láminas) ---------- */
+const DATA = [
+  { id:"cervezas", title:"Cervezas", kicker:"Carta de cervezas", type:"list", groups:[
+    { name:"Premium e importadas", items:[
+      {n:"Miller Lite", p:4000},
+      {n:"Sol", d:"250 ml", p:4000},
+      {n:"Heineken", p:4500},
+      {n:"Corona", d:"lata", p:5000},
+      {n:"Coronita", p:5000},
+      {n:"Michelob", p:5000},
+      {n:"Stella Artois", d:"lata", p:6000},
+      {n:"3 Cordilleras", p:6500},
+      {n:"Corona Grande", p:9000}
+    ]},
+    { name:"Saborizadas y refajo", items:[
+      {n:"Refajo Andina", p:3500},
+      {n:"Redd's Rosé", p:4500},
+      {n:"Redd's Verde", p:4500}
+    ]}
+  ]},
+  { id:"aguardiente", title:"Aguardiente & Otros", short:"Aguardiente y otros", type:"two", groups:[
+    { name:"", items:[
+      {n:"Aguardiente Manzanares", m:60000, p:100000},
+      {n:"Aguardiente Onix amarillo", m:60000, p:90000},
+      {n:"Aguardiente Líder tapa azul", m:60000, p:90000},
+      {n:"Ron Viejo de Caldas", m:null, p:90000, u:"1 L"},
+      {n:"Smirnoff Tamarindo", m:null, p:80000}
+    ]}
+  ]},
+  { id:"whisky", title:"Whisky", kicker:"Carta de whiskies", type:"list", groups:[
+    { name:"Gama económica", tier:"economica", items:[
+      {n:"Ballantine's Finest", d:"1 L", p:120000},
+      {n:"Black & White", d:"700 ml", p:100000},
+      {n:"Ballantine's Finest", d:"500 ml", p:44000}
+    ]},
+    { name:"Gama media", tier:"media", items:[
+      {n:"Chivas Regal Extra", d:"13 años", p:230000},
+      {n:"Grand Old Parr", d:"12 años", p:210000},
+      {n:"Buchanan's Deluxe", d:"12 años", p:220000},
+      {n:"Chivas Regal", d:"12 años", p:210000},
+      {n:"Jack Daniel's Tennessee Whiskey", p:220000},
+      {n:"Johnnie Walker Black Label", d:"12 años", p:240000},
+      {n:"Jack Daniel's Apple", p:210000}
+    ]},
+    { name:"Gama alta", tier:"alta", items:[
+      {n:"Johnnie Walker Double Black", p:320000},
+      {n:"Buchanan's Master", p:300000},
+      {n:"James Buchanan's Special Reserve", d:"18 años", p:530000},
+      {n:"Glenfiddich", d:"12 años", p:330000}
+    ]}
+  ]},
+  { id:"tequila", title:"Tequila", kicker:"Carta de tequilas", type:"list", groups:[
+    { name:"Gama media", tier:"media", items:[
+      {n:"Olmeca Reposado", d:"700 ml", p:160000},
+      {n:"Caballos Reposado", d:"750 ml", p:180000},
+      {n:"Olmeca Dark Chocolate", d:"750 ml", p:160000}
+    ]},
+    { name:"Gama alta", tier:"alta", items:[
+      {n:"Don Julio Blanco", d:"750 ml", p:410000},
+      {n:"Patrón Silver", d:"750 ml", p:410000}
+    ]}
+  ]}
+];
+const TIERS = [["todas","Todas las gamas"],["economica","Económica"],["media","Media"],["alta","Alta"]];
+
+/* ---------- Estado ---------- */
+const state = { cat:"todo", tier:"todas", q:"", sort:false };
+const $ = s => document.querySelector(s);
+const fmt = n => "$ " + n.toLocaleString("es-CO");
+const norm = s => (s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function hl(text, q){
+  if(!q) return esc(text);
+  const t = norm(text), i = t.indexOf(q);
+  if(i < 0) return esc(text);
+  return esc(text.slice(0,i)) + "<mark>" + esc(text.slice(i,i+q.length)) + "</mark>" + esc(text.slice(i+q.length));
+}
+
+/* ---------- Chips ---------- */
+function buildChips(){
+  const cats = [["todo","Todo"], ...DATA.map(s => [s.id, s.short || s.title])];
+  $("#catChips").innerHTML = cats.map(([id,l]) =>
+    `<button class="chip" type="button" data-cat="${id}" aria-pressed="${state.cat===id}">${esc(l)}</button>`).join("");
+  $("#tierChips").innerHTML = TIERS.map(([id,l]) =>
+    `<button class="chip" type="button" data-tier="${id}" aria-pressed="${state.tier===id}">${esc(l)}</button>`).join("");
+}
+function syncChips(){
+  document.querySelectorAll("[data-cat]").forEach(b => b.setAttribute("aria-pressed", b.dataset.cat===state.cat));
+  document.querySelectorAll("[data-tier]").forEach(b => b.setAttribute("aria-pressed", b.dataset.tier===state.tier));
+  $("#tierChips").classList.toggle("show", state.cat==="whisky" || state.cat==="tequila");
+}
+
+/* ---------- Render ---------- */
+function render(){
+  const q = norm(state.q.trim());
+  let html = "", total = 0;
+  const tierOn = (state.cat==="whisky" || state.cat==="tequila") && state.tier!=="todas";
+
+  for(const sec of DATA){
+    if(state.cat!=="todo" && state.cat!==sec.id) continue;
+    let secHtml = "";
+    for(const g of sec.groups){
+      if(tierOn && g.tier!==state.tier) continue;
+      let items = g.items.filter(it => !q || norm(it.n+" "+(it.d||"")+" "+(it.u||"")+" "+sec.title+" "+g.name).includes(q));
+      if(!items.length) continue;
+      if(state.sort) items = [...items].sort((a,b) => a.p - b.p);
+      total += items.length;
+      const head = sec.type==="two"
+        ? `<div class="colhead"><span>Producto</span><span>Media</span><span>Botella</span></div>`
+        : `<div class="colhead"><span>Producto</span><span>Precio</span></div>`;
+      const rows = items.map(it => {
+        const name = `<span class="name">${hl(it.n,q)}${it.d?`<em>${hl(it.d,q)}</em>`:""}</span>`;
+        if(sec.type==="two"){
+          const m = it.m ? `<span class="price">${fmt(it.m)}</span>` : `<span class="price dash">–</span>`;
+          const b = `<span class="price">${fmt(it.p)}${it.u?` <small>(${esc(it.u)})</small>`:""}</span>`;
+          return `<div class="row">${name}${m}${b}</div>`;
+        }
+        return `<div class="row">${name}<span class="price">${fmt(it.p)}</span></div>`;
+      }).join("");
+      secHtml += `<div class="grp">${g.name?`<h3 class="grp-name">${esc(g.name)}</h3>`:""}${head}${rows}</div>`;
+    }
+    if(!secHtml) continue;
+    html += `<section class="cat ${sec.type}" id="${sec.id}">
+      <div class="cat-head">${sec.kicker?`<p class="kicker">${esc(sec.kicker)}</p>`:""}<h2 class="cat-title">${esc(sec.title)}</h2></div>
+      ${secHtml}</section>`;
+  }
+  $("#app").innerHTML = html;
+  $("#empty").classList.toggle("show", total===0);
+  $("#count").textContent = total + (total===1 ? " producto" : " productos");
+  $("#sortBtn").textContent = state.sort ? "Ordenar: menor a mayor precio" : "Ordenar: como en la carta";
+  syncChips();
+}
+
+/* ---------- Eventos ---------- */
+$("#catChips").addEventListener("click", e => {
+  const b = e.target.closest("[data-cat]"); if(!b) return;
+  state.cat = b.dataset.cat;
+  if(state.cat!=="whisky" && state.cat!=="tequila") state.tier = "todas";
+  render();
+  if(state.cat!=="todo") window.scrollTo({top:document.querySelector(".controls").offsetTop + 120, behavior:"smooth"});
+});
+$("#tierChips").addEventListener("click", e => {
+  const b = e.target.closest("[data-tier]"); if(!b) return;
+  state.tier = b.dataset.tier; render();
+});
+$("#q").addEventListener("input", e => {
+  state.q = e.target.value;
+  $("#searchBox").classList.toggle("has-text", !!state.q);
+  render();
+});
+$("#clear").addEventListener("click", () => {
+  $("#q").value = ""; state.q = ""; $("#searchBox").classList.remove("has-text"); render(); $("#q").focus();
+});
+$("#sortBtn").addEventListener("click", () => { state.sort = !state.sort; render(); });
+$("#top").addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
+window.addEventListener("scroll", () => $("#top").classList.toggle("show", window.scrollY > 600), {passive:true});
+
+buildChips();
+render();
+</script>
+</body>
+</html>
